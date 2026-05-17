@@ -57,4 +57,4 @@ Or execute the command `.venv\Scripts\activate` (Windows) or `source .venv/bin/a
 MIT License - Feel free to fork and mess around, but please do not use it for any truly malicious purposes. The author bears no responsibility for any accidents caused by the use of this project (such as victims smashing keyboards, computers, or engaging in real-life fighting because they cannot beat "Touhou Legacy of Lunatic Kingdom").
 
 ## Inspired by
-[RensenWare](https://github.com/0x00000FF/rensenware-cut) - by [@0x00000FF](https://github.com/0x00000FF) 
+[RensenWare](https://github.com/0x00000FF/rensenware-cut) - by @0x00000FF
