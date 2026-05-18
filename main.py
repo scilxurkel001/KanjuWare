@@ -251,5 +251,15 @@ if __name__ == "__main__":
             )
 
     root = tk.Tk()
+    root.withdraw()
+    start_confirmation = messagebox.askyesno(
+        "Start Warning",
+        "Warning: Although this prank software is not actually very destructive, many unsuspecting individuals may still be frightened by it. To avoid causing serious harm or loss, please follow the steps below to perform a self-check: \n\n1. You are aware of the software's operational characteristics. \n2. You are certain that you can reverse all impacts caused by this software. \n\nIf you meet the criteria outlined in the self-check steps above, you may click \"Yes\" to proceed with the challenge. Otherwise, please click \"No\" directly and permanently delete the software.",
+    )
+    if not start_confirmation:
+        root.destroy()
+        sys.exit(0)
+
+    root.deiconify()
     app = KanjuWareApp(root)
     root.mainloop()
