@@ -7,8 +7,6 @@ import time
 import threading
 import tkinter as tk
 from tkinter import messagebox
-from PIL import Image, ImageDraw, ImageFont
-import io
 from pymem import Pymem
 
 # ==================== Configuration ====================
