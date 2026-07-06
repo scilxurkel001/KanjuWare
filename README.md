@@ -13,7 +13,7 @@ An entertainment project developed based on Python + Pymem + Tkinter, paying tri
 3. **Spiritual Synchronization**: The background thread employs a lock-free design, performing real-time reads of ZUN's sacred memory base address `0x004E40BC` and `004E740C` every 200ms. Every time you score a point in the game, the score on the interface will simultaneously soar.
 4. **Developer's Mercy**: An invisible pixel is hidden in the bottom-right corner of the interface; double-clicking it will trigger a hidden backdoor to complete the level directly (self-rescue channel).
 
-# Compare to Rensenware
+## Compare to Rensenware
 
 1. Rensenware uses true encryption, whereas KanjuWare only changes file names. This means that once something goes wrong with Rensenware, files will be unrecoverable; however, with KanjuWare, even if the process is accidentally killed or the software unexpectedly crashes, you can still recover files using bulk renaming tools.
 2. Rensenware often crashes when reading read-only files, but KanjuWare has a perfect file accessibility detection mechanism, which means you don't need to remove your disc drive anymore.
