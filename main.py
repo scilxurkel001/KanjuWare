@@ -284,7 +284,7 @@ class KanjuWareApp:
             self.root.after(100, self.update_loop)
 
     def cheat_unlock(self, event):
-        print("[Backdoor] You've triggered the cheat unlock! This is for testing and emergency recovery purposes. Files will be decrypted without reaching the target score.")
+        messagebox.showinfo("[Backdoor] You've triggered the cheat unlock! This is for testing and emergency recovery purposes. Files will be decrypted without reaching the target score.")
         self.is_unlocked = True
 
     def on_closing(self):
