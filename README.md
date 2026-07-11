@@ -52,8 +52,8 @@ Note, it is **NOT recommended** to do this, as it will cause the host files to b
 
 ## Production Packaging
 
-Execute `uv run pyinstaller -F --noconsole --icon="kanju.ico" --name "KanjuWare" main.py`. 
-Or execute the command `.venv\Scripts\activate` (Windows) or `source .venv/bin/activate` (macOS / Linux) to activate the environment, and execute `pyinstaller -F --noconsole --icon="kanju.ico" --name "KanjuWare" main.py`.
+Execute `uv run pyinstaller -F --noconsole --add-data "assets;assets" --icon="kanju.ico" --name "KanjuWare" main.py`. 
+Or execute the command `.venv\Scripts\activate` (Windows) or `source .venv/bin/activate` (macOS / Linux) to activate the environment, and execute `pyinstaller -F --noconsole --add-data "assets;assets" --icon="kanju.ico" --name "KanjuWare" main.py`.
 
 ---
 
