@@ -132,13 +132,13 @@ class KanjuWareApp:
             right_frame.pack(side="right", fill="both", expand=True)
 
             instruction_text = (
-                "Oops, your file has been infected by \"Pure Mutation\"!\n\n"
+                "Oops, your files have been infected by \"Pure Mutation\"!\n\n"
                 "What the HELL is it?\n"
                 "The mutation has caused your precious data to be encrypted, including "
                 "documents, images, music, and some project files. Only this program can "
                 "recover the files, because the files have been \"encrypted\" using a "
                 "\"high-strength encryption algorithm with a random key.\"\n\n"
-                "How can I recover my file?\n"
+                "How can I recover my files?\n"
                 "That's easy, you just need to reach 50 million points in any difficulty "
                 "in the \"Touhou Kanjuden\" Trial or Full version, and this program will automatically "
                 "detect the process and score of \"Touhou Kanjuden\". If you do not "
