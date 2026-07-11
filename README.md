@@ -24,7 +24,7 @@ An entertainment project developed based on Python + Pymem + Tkinter, paying tri
 
 ### What does 50 million mean?
 
-This means any one of the following (tested by the author. The data may be inaccurate because the author used cheat tools while testing the HARD and LUNATIC difficulties and the EX Stage.):
+This means any one of the following (tested by the author. The data may be inaccurate because the author used trainers while testing the HARD and LUNATIC difficulties and the EX Stage.):
 - Reach and beat the midway of Stage 3 on EASY / NORMAL difficulty.
 - Reach and beat the final boss of Stage 2 on HARD / LUNATIC difficulty.
 - (In full version, practice mode) Beat Stage 3/4/5/6 on EASY / NORMAL / HARD difficulty.
