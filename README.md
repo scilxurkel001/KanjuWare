@@ -32,7 +32,7 @@ This means any one of the following (tested by the author. The data may be inacc
 - (In full version, practice mode) Beat Stage 3/4/6 on LUNATIC difficulty.
 - (In full version) Beat EX stage.
 
-**See, it is way more easy to "unlock" file in legit way than Rensenware！**
+**See, it is easier to "unlock" file in legit way than Rensenware！**
 
 ---
 
