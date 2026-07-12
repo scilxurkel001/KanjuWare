@@ -37,7 +37,7 @@ This means any one of the following (tested by the author. The data may be inacc
 ## How to unlock it?
 
 Try one of these methods:
-1. (Legit) Reach 50 million points in *Touhou 15: Legacy of Lunatic Kingdom* in full or trial version.
+1. (Legit) Reach 50 million points in *Touhou 15: Legacy of Lunatic Kingdom* full or trial version.
 2. (Easy) Use Cheat Engine or trainers to change your score.
 3. (Easier) Download RPY file from release, place it in `%APPDATA%\th15tr\replay`, and launch *Touhou 15: Legacy of Lunatic Kingdom* trial version to replay it.
 4. (Cheat) Use backdoor.
