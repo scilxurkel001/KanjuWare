@@ -41,7 +41,7 @@ Try one of these methods:
 2. (Easy) Use Cheat Engine or trainers to change your score.
 3. (Easier) Download RPY file from release, place it in `%APPDATA%\th15tr\replay`, and launch *Touhou 15: Legacy of Lunatic Kingdom* trial version to replay it.
 4. (Cheat) Use backdoor.
-5. (In system) Juse shut the window in Task Manager, and rename the files manually.
+5. (In system) Just shut the window in Task Manager, and rename the files manually.
 
 ---
 
