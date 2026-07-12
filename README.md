@@ -88,7 +88,7 @@ Recomended:
 - Sound Card: DirectSound compatible
 - Operating System: Full-Patched Windows 7, or Windows 8.1 / Windows 10 / Windows 11.
 
-As for 3D acceleration issues in VMware 17, the VMware 15/16 is recommended.
+As for 3D acceleration issues in VMware 17, the VMware 15/16 is recommended. Although VirtualBox offers 3D acceleration, its implementation falls short of VMware's; Hyper-V lacks 3D acceleration in both basic and enhanced sessions, making it impossible to run games; Linux KVM requires enabling VirtIO-GPU and using Mesa (or another Vulkan-based renderer) combined with DXVK to maintain a frame rate of 60 FPS.
 
 ## License
 MIT License - Feel free to fork and mess around, but please do not use it for any truly malicious purposes. The author bears no responsibility for any accidents caused by the use of this project (such as victims smashing keyboards, computers, or engaging in real-life fighting because they cannot beat "Touhou Legacy of Lunatic Kingdom").
