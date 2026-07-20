@@ -1,5 +1,7 @@
 # KanjuWare - Kanju Pure Mutation Simulator
 
+English / [简体中文 Simplified Chinese](README_ZHCN.md)
+
 An entertainment project developed based on Python + Pymem + Tkinter, paying tribute to the 2017 classic fan trope **Rensenware**.
 
 > **Disclaimer:** This program is intended solely for technical exchange, virtual machine experimentation, and group member entertainment. It **will NOT** actually encrypt any files, NOR will it upload any data; it is essentially a fully automated, harmless file-renaming repeater.
