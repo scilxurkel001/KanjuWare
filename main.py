@@ -35,7 +35,7 @@ FILE_EXTENSIONS_NEED_TO_RENAME = {
     ".psd", ".ai", ".indd", ".sketch", ".blend", ".fbx", ".obj", ".dwg", ".dxf", ".3ds", ".max",
     ".pmm", ".pmmx", ".pmmz", ".pmm3d", ".pmm2d", ".pmmproj", ".pmmtemplate", ".pmmbackup", ".pmx",
     ".cpr", ".song", ".dawproject", ".flp", ".als", ".logicx", ".ptf", ".ptf2", ".ptf3", ".ptf4", ".ptf5", ".ptf6", ".ptf7", ".mscz", ".sib", ".notion", ".dorico", ".npr", ".nprproj", ".nprbackup", ".nprtemplate", ".nprarchive", ".vpr", ".ustx",
-    ".sanaeenc",
+    ".sanaeenc", ".lnk", 
 
     ".PDF", ".TXT", ".MD", ".JSON", ".DOC", ".DOCX", ".ODT", ".WPS",
     ".PPT", ".PPTX", ".XLS", ".XLSX", ".CSV", ".TSV", ".SQL", ".DB", ".MDB", ".ACCDB", ".ODP", ".ODS",
@@ -47,7 +47,7 @@ FILE_EXTENSIONS_NEED_TO_RENAME = {
     ".PSD", ".AI", ".INDD", ".SKETCH", ".BLEND", ".FBX", ".OBJ", ".DWG", ".DXF", ".3DS", ".MAX",
     ".PMM", ".PMMX", ".PMMZ", ".PMM3D", ".PMM2D", ".PMMPROJ", ".PMMTEMPLATE", ".PMMBACKUP", ".PMX",
     ".CPR", ".SONG", ".DAWPROJECT", ".FLP", ".ALS", ".LOGICX", ".PTF", ".PTF2", ".PTF3", ".PTF4", ".PTF5", ".PTF6", ".PTF7", ".MSCZ", ".SIB", ".NOTION", ".DORICO", ".NPR", ".NPRPROJ", ".NPRBACKUP", ".NPRTEMPLATE", ".NPRARCHIVE", ".VPR", ".USTX", 
-    ".SANAEENC"
+    ".SANAEENC", ".LNK"
 } # This set contains the file extensions that the program will target for "encryption" (actually just renaming). The program will scan all files on the system and if a file has one of these extensions and is not already "encrypted" (i.e., does not already have the TARGET_EXTENSION), it will rename the file to add the TARGET_EXTENSION. This simulates the effect of encryption without actually modifying the file contents, which allows for easy recovery by simply renaming the files back to their original names. The list includes common document, image, audio, video, archive, code, and design file formats in both lowercase and uppercase to ensure comprehensive coverage.
 # =======================================================
 
