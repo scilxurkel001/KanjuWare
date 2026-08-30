@@ -13,7 +13,7 @@ An entertainment project developed based on Python + Pymem + Tkinter, paying tri
 1. **Pure Disguise**: Upon activation, it will automatically request administrator privileges (UAC), then traverse the entire disk in the background at extremely high speeds, appending `.LoLK` (Legacy of Lunatic Kingdom) to the end of filenames with specified extensions.
 2. **Madness Danmaku Decryption**: The interface is locked and displays a "High-Pressure Ransom Note." The only legitimate way to decrypt it is to launch the trial or full version of *Touhou 15: Legacy of Lunatic Kingdom* (th15.exe) and score a full **50,000,000 (50 million)** points on any difficulty level.
 3. **Spiritual Synchronization**: The background thread employs a lock-free design, performing real-time reads of ZUN's sacred memory base address `0x004E40BC` and `004E740C` every 200ms. Every time you score a point in the game, the score on the interface will simultaneously soar.
-4. **Developer's Mercy**: An invisible pixel is hidden in the bottom-right corner of the interface; double-clicking it will trigger a hidden backdoor to complete the level directly (self-rescue channel).
+4. ~**Developer's Mercy**: An invisible pixel is hidden in the bottom-right corner of the interface; double-clicking it will trigger a hidden backdoor to complete the level directly (self-rescue channel).~ (May no longer work; the new version has not been verified.)
 
 ## Compare to Rensenware
 
