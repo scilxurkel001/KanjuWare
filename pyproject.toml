@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
+    "pillow>=10.4.0",
     "pyinstaller>=6.20.0",
     "pymem>=1.14.0",
 ]
