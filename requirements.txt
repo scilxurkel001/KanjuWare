@@ -12,6 +12,8 @@ packaging==26.2
     #   pyinstaller-hooks-contrib
 pefile==2024.8.26
     # via pyinstaller
+pillow==10.4.0
+    # via kanjuware (pyproject.toml)
 pyinstaller==6.20.0
     # via kanjuware (pyproject.toml)
 pyinstaller-hooks-contrib==2026.5
